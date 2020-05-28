@@ -1,0 +1,1 @@
+option('cfgdir', type: 'string', value: '/etc/ftn', description: 'config dir')
