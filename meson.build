@@ -59,7 +59,7 @@ perl_src=[]
     else
       perl_def=run_command(perl,'-MExtUtils::Embed','-e','ccopts')
       foreach d: perl_def.stdout().strip().split()
-        if d!='' and d!='-pipe'
+        if d.startswith('-I') or d.startswith('-D')
           cflags+=d
        endif
       endforeach
