@@ -57,6 +57,9 @@ perl_src=[]
         endif
       endforeach
     else
+      if cc.get_id() == 'gcc'
+          cflags+='-fPIC'
+      endif
       perl_def=run_command(perl,'-MExtUtils::Embed','-e','ccopts')
       foreach d: perl_def.stdout().strip().split()
         if d.startswith('-I') or d.startswith('-D')
