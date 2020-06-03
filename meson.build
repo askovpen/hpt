@@ -94,6 +94,7 @@ if get_option('perl-static')==true and host_machine.system()=='linux'
   perl_proj=subproject('perlstatic')
   libs+=perl_proj.get_variable('perl_dep')
   add_project_arguments(['-DDO_PERL'], language: 'c')
+  link_args+='-static'
   perl_src += files(['src/perl.c'])
 endif
 
@@ -116,6 +117,7 @@ executable('hpt',
 ])+perl_src,
   include_directories : incdir,
   dependencies:[areafix_dep, hptzip_dep, libs],
+  link_args: link_args,
   install: true
 )
 
@@ -129,6 +131,7 @@ executable('pktinfo',
   ]),
   include_directories : incdir,
   dependencies:[areafix_dep],
+  link_args: link_args,
   install: true
 )
 executable('tpkt',
@@ -142,6 +145,7 @@ executable('tpkt',
   ]),
   include_directories : incdir,
   dependencies:[areafix_dep],
+  link_args: link_args,
   install: true
 )
 
