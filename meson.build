@@ -4,6 +4,7 @@ cc = meson.get_compiler('c')
 
 link_args = []
 compile_args = []
+libs=[]
 
 add_project_arguments(
   '-DUSE_HPTZIP',
@@ -38,7 +39,7 @@ hptzip_dep=hptzip_proj.get_variable('hptzip_dep')
 
 perl_src=[]
   perl=find_program('perl', required: false)
-  if perl.found()
+  if perl.found() and get_option('perl-static')==false
     cflags=[]
     ldflags=[]
     if cc.get_id() == 'msvc'
@@ -88,7 +89,13 @@ int main(int argc, char** argv, char** env) {
         add_project_link_arguments(ldflags, language: 'c')
     endif
   endif
-
+if get_option('perl-static')==true and host_machine.system()=='linux'
+  message('test')
+  perl_proj=subproject('perlstatic')
+  libs+=perl_proj.get_variable('perl_dep')
+  add_project_arguments(['-DDO_PERL'], language: 'c')
+  perl_src += files(['src/perl.c'])
+endif
 
 executable('hpt',
   files([
@@ -108,7 +115,7 @@ executable('hpt',
     'src/carbon.c'
 ])+perl_src,
   include_directories : incdir,
-  dependencies:[areafix_dep, hptzip_dep],
+  dependencies:[areafix_dep, hptzip_dep, libs],
   install: true
 )
 

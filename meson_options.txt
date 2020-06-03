@@ -1,1 +1,2 @@
 option('cfgdir', type: 'string', value: '/etc/ftn', description: 'config dir')
+option('perl-static', type: 'boolean', value: false, description: 'build perl static')
