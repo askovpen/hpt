@@ -7,4 +7,4 @@ source_hash = 66db7df8a91979eb576fac91743644da878244cf8ee152f02cd6f5cd7a731689
 
 patch_url = https://skovpen.org/perl-5.30.2-2-wrap.zip
 patch_filename = perl-5.30.2-2-wrap.zip
-patch_hash = 70059ace162252772ae38466b303bfeacd48290ea432d5cbbbd4ad110e29ad81
+patch_hash = 961cb9a3c31d82fa75a0b22cf72ebba6425a7de9e13d5a3bc2c48b3a516ab8f8
